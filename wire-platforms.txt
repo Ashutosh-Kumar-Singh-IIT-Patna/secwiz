@@ -1,0 +1,820 @@
+# Doc bundle: 1.0 — Security Alerts Copilot / Wire platform index (human-readable).
+# Peers: SECURITY_ALERTS_PRD.md, PLATFORM_FLOW.md — bump bundle version together when changing any of the three.
+# Format: repeated blocks of — display name, display name (dup), domain/URL, blank line, description, blank line, category (lowercase slug).
+# Importers: skip lines where the first non-whitespace character is `#` (metadata only; not a catalog record).
+#
+AP News
+AP News
+apnews.com
+
+get latest wire articles, browse by section, read full articles with keywords, search by keyword, follow journalists, and access AP fact-check articles.
+
+news
+Agoda
+Agoda
+agoda.com
+
+online travel platform for hotels, vacation rentals, flights, and tours (Booking Holdings).
+
+travel
+Airbnb
+Airbnb
+airbnb.com
+
+search stays by destination and dates, resolve locations to identifiers, fetch full listing details.
+
+travel
+Al Jazeera
+Al Jazeera
+aljazeera.com
+
+get latest articles, browse by section, read full articles, search by keyword, and follow journalists. Leading English-language source for Middle East, Africa, and Global South coverage.
+
+news
+AlternativeTo
+AlternativeTo
+alternativeto.net
+
+search software, get full details, and find crowd-ranked alternatives filtered by platform and license.
+
+developer-tools
+Amazon
+Amazon
+amazon.com
+
+search products, get details, reviews, pricing. Add to cart and manage orders with authentication.
+
+ecommerce
+Auth
+Apollo Pharmacy
+Apollo Pharmacy
+https://www.apollopharmacy.in/
+
+India's largest pharmacy chain. Medicines, OTC, wellness, and diagnostics data.
+
+pharmacy
+BBC News
+BBC News
+bbc.com
+
+get top stories, browse by section or world region, read full articles with author and topics, browse topic pages, search by keyword, follow specific journalists, and get sport news.
+
+news
+BIS (Bank for International Settlements)
+BIS (Bank for International Settlements)
+bis.org
+
+central bank policy rates, credit-to-GDP gaps, debt service ratios, property prices, effective exchange rates, and CPI for 60+ countries.
+
+finance
+BLS (Bureau of Labor Statistics)
+BLS (Bureau of Labor Statistics)
+bls.gov
+
+official US labor market and price data: unemployment, CPI, payrolls, JOLTS, PPI, productivity, employment costs, and earnings.
+
+finance
+BSE India
+BSE India
+bseindia.com
+
+Bombay Stock Exchange market data, quotes, and corporate filings.
+
+finance
+BigBasket
+BigBasket
+bigbasket.com
+
+India's largest online grocery and household marketplace (Tata Digital).
+
+ecommerce
+Blinkit
+Blinkit
+blinkit.com
+
+Grocery product listings and PDP APIs on blinkit.com for category browsing, pagination, and full product detail.
+
+ecommerce
+Booking.com
+Booking.com
+booking.com
+
+search hotels by destination and dates, resolve locations to destination IDs.
+
+travel
+CBOE
+CBOE
+cboe.com
+
+VIX volatility indices (VIX, VIX9D, VIX3M, VIX6M, VVIX), SKEW tail risk index, oil/gold volatility, and VIX term structure.
+
+finance
+CFTC
+CFTC
+cftc.gov
+
+weekly Commitment of Traders (COT) positioning data and Traders in Financial Futures (TFF) reports for futures markets including equities, commodities, FX, rates, and crypto.
+
+finance
+CNBC
+CNBC
+cnbc.com
+
+get top stories, browse by section or market category, read full articles, get real-time stock quotes, search by keyword, follow journalists, and access specialized feeds like Buffett Watch and Trader Talk.
+
+news
+CoinGecko
+CoinGecko
+coingecko.com
+
+live crypto prices, market data, OHLC charts, trending coins, exchange rankings, DeFi stats, derivatives, NFTs, and global market overview.
+
+finance
+Corning Life Sciences
+Corning Life Sciences
+https://ecatalog.corning.com
+
+cell culture flasks, microplates, pipette tips, and glassware.
+
+lab-supplies
+Auth
+Costco
+Costco
+costco.com
+
+Search products, fetch product details and pricing, locate warehouses, read warehouse details and gas prices, and browse Costco categories.
+
+ecommerce
+Craigslist
+Craigslist
+craigslist.org
+
+search apartments, cars, jobs, and for-sale items across 400+ US regions. Get full listing details with photos and location, and browse all valid region codes.
+
+classifieds
+Croma
+Croma
+croma.com
+
+fetch product details with specs and pricing, check bank offers and promotions, get EMI plans, verify stock availability by pincode.
+
+ecommerce
+Auth
+Cytiva Life Sciences
+Cytiva Life Sciences
+https://www.cytivalifesciences.com\
+
+Search and order Cytiva Life Sciences products for bioprocessing, cell culture, chromatography, filtration, and fluorescent dyes.
+
+lab-supplies
+Auth
+DEV Community
+DEV Community
+dev.to
+
+browse articles by tag, get full article content, explore popular tags, view user profiles.
+
+developer-tools
+DolarApp
+DolarApp
+https://www.arqfinance.com
+
+Latin American stablecoin wallet (USDC <-> local fiat: COP, MXN, ARS, BRL).
+
+finance
+Drugs.com
+Drugs.com
+drugs.com
+
+search drugs, get detailed drug info, side effects, interactions, patient reviews, pharmacy prices, and condition-based drug lists.
+
+health
+ECB (European Central Bank)
+ECB (European Central Bank)
+ecb.europa.eu
+
+official EUR exchange rates, ECB policy interest rates, euro area money supply (M1/M2/M3), and AAA government bond yield curves.
+
+finance
+EIA (Energy Information Administration)
+EIA (Energy Information Administration)
+eia.gov
+
+US energy data: petroleum prices and stocks, natural gas storage, electricity generation and prices, coal, nuclear outages, crude imports, and short-term energy forecasts.
+
+finance
+ESPNcricinfo
+ESPNcricinfo
+espncricinfo.com
+
+Cricket scores, live match data, and scorecard APIs for current matches, batting/bowling stats, and match status.
+
+ecommerce
+Economic Times
+Economic Times
+economictimes.indiatimes.com
+
+Indian market data and business news. Get top gainers/losers, all 25 NSE/BSE indices, stock search, high-volume screener, advance/decline ratios, forex rates, ET500 rankings, mutual fund categories, market status, full articles, and news search.
+
+finance
+FRED (St. Louis Fed)
+FRED (St. Louis Fed)
+fred.stlouisfed.org
+
+500,000+ US economic time-series. GDP, inflation, unemployment, interest rates, yield curves, money supply, housing, energy prices, and more.
+
+finance
+Fear & Greed Index
+Fear & Greed Index
+alternative.me
+
+CNN Fear & Greed Index (US stocks, 7 sub-indicators) and Crypto Fear & Greed Index (daily since 2018).
+
+finance
+Finviz
+Finviz
+finviz.com
+
+stock screener, quotes with 35+ metrics, financial news, insider trading, futures prices, and sector performance for US equities.
+
+finance
+Fisher Scientific
+Fisher Scientific
+www.fishersci.com/us/en/home.html
+
+Fisher Scientific is a leading scientific products and laboratory supply marketplace offering reagents, chemicals, equipment, and consumables for research and clinical use.
+
+ecommerce
+Flipkart
+Flipkart
+flipkart.com
+
+search products, get details, reviews, pricing, and order history.
+
+ecommerce
+Auth
+GitHub
+GitHub
+github.com
+
+search repos and users, get repo details and releases, browse trending repos and developers, view user profiles and repositories.
+
+developer-tools
+Goodreads
+Goodreads
+goodreads.com
+
+search books by title/author/ISBN, fetch book details with ratings and genres, get author profiles, browse curated book lists.
+
+books
+Google Flights
+Google Flights
+google.com
+
+search flights and browse cheapest prices by date.
+
+travel
+Google News
+Google News
+news.google.com
+
+search articles, get top stories, browse by topic, track trending stories, read local news, monitor specific publishers, extract full article text, and find related coverage across sources.
+
+news
+Google Trends
+Google Trends
+trends.google.com
+
+get search interest over time, regional breakdowns, related queries and topics, trending searches, compare up to 5 keywords, keyword suggestions, and browse 1000+ category IDs.
+
+analytics
+Hacker News
+Hacker News
+news.ycombinator.com
+
+get top/new/best/ask/show/job stories, fetch items with nested comments, search posts, view user profiles.
+
+news
+IMDb
+IMDb
+imdb.com
+
+search movies/TV/people, get full title details, cast, ratings, reviews, episode guides, top charts, and advanced filtered search.
+
+entertainment
+IMF (International Monetary Fund)
+IMF (International Monetary Fund)
+imf.org
+
+GDP growth forecasts, inflation outlook, fiscal monitor, debt analysis, external sector data, and country comparisons for 200+ countries.
+
+finance
+Income Tax India
+Income Tax India
+https://www.incometax.gov.in
+
+circulars, notifications, treaties, and press releases from the Income Tax Department.
+
+finance
+Indeed
+Indeed
+indeed.com
+
+search jobs, get salary estimates, view job details, and look up locations.
+
+jobs
+Auth
+Instacart
+Instacart
+instacart.com
+
+browse stores, categories, and products for grocery delivery by zip code.
+
+ecommerce
+Auth
+Investing.com
+Investing.com
+investing.com
+
+global economic calendar, earnings calendar, dividend calendar, IPO calendar, stock split calendar, and financial instrument search.
+
+finance
+Jiomart
+Jiomart
+jiomart.com
+
+Fetch product details from a JioMart product page. Navigate to the product detail page, capture all XHR/API calls that return product information such as product name, price, description, images, availability, specifications, ratings, and reviews.
+
+ecommerce
+Jobicy
+Jobicy
+jobicy.com
+
+global remote jobs filtered by location, industry, and skill tags with salary data.
+
+jobs
+Kalshi
+Kalshi
+https://kalshi.com/
+
+CFTC-regulated US prediction-market exchange. Public endpoints, no auth required.
+
+prediction-markets
+LG US
+LG US
+lg.com
+
+Fetch all product details, specially pricing and availability based on zip code.
+
+ecommerce
+Luma
+Luma
+lu.ma
+
+discover events by location, get event details, and browse available places worldwide.
+
+events
+Auth
+Manifold Markets
+Manifold Markets
+https://manifold.markets/
+
+play-money prediction-market platform. Public endpoints, no auth required.
+
+prediction-markets
+Medium
+Medium
+medium.com
+
+browse articles by topic tag, read publication feeds, and search articles by keyword.
+
+content
+Meetup
+Meetup
+meetup.com
+
+search events, get details, RSVP, and find locations by city or ZIP code.
+
+events
+Auth
+Mercado Livre (Brazil)
+Mercado Livre (Brazil)
+https://www.mercadolivre.com
+
+Brazil's largest e-commerce marketplace. Search products, browse categories, get pricing, reviews, seller profiles, and deals from mercadolivre.com.br.
+
+ecommerce
+Miltenyi Biotec
+Miltenyi Biotec
+https://www.miltenyibiotec.com
+
+Search and order Miltenyi Biotec antibodies, cell separation reagents, and flow cytometry products for life sciences research.
+
+lab-supplies
+Auth
+Moneycontrol
+Moneycontrol
+https://www.moneycontrol.com/
+
+Indian stock market data, news, IPOs, and sector performance.
+
+finance
+NASDAQ
+NASDAQ
+nasdaq.com
+
+earnings calendar, IPO calendar, dividend calendar, market movers, stock screener, real-time quotes, and historical price data.
+
+finance
+NSE India
+NSE India
+nseindia.com
+
+live quotes, indices, option chains, gainers/losers, bulk deals, corporate actions, insider trading, pre-open data, and 52-week signals.
+
+finance
+Netmeds
+Netmeds
+https://www.netmeds.com
+
+India leading online pharmacy by Reliance. Medicines, OTC, wellness, and health products.
+
+pharmacy
+New England Biolabs
+New England Biolabs
+neb.com
+
+Search and order New England Biolabs reagents, enzymes, and kits for molecular biology research.
+
+lab-supplies
+Auth
+Nike
+Nike
+nike.com
+
+products, search, availability, reviews, SNKRS launches, and store locator.
+
+ecommerce
+Nikkei Asia
+Nikkei Asia
+asia.nikkei.com
+
+get latest articles, browse by section or country/region, read full articles (including paywalled), search natively, see most read, find related articles, and track topics.
+
+news
+Noon
+Noon
+https://www.noon.com/
+
+Middle East e-commerce marketplace (UAE, Saudi Arabia, Egypt, Qatar).
+
+ecommerce
+Polymarket
+Polymarket
+https://polymarket.com/
+
+prediction market data including markets, events, prices, order books, price history, and user positions.
+
+prediction-markets
+Product Hunt
+Product Hunt
+producthunt.com
+
+discover trending products, view launch details, and look up maker profiles.
+
+developer-tools
+PubMed
+PubMed
+pubmed.ncbi.nlm.nih.gov
+
+search biomedical literature, list article summaries, fetch full article details with abstracts, authors, MeSH terms, and keywords.
+
+research
+PyPI
+PyPI
+pypi.org
+
+get Python package details, browse new releases, check download statistics.
+
+developer-tools
+Qiagen
+Qiagen
+https://www.qiagen.com
+
+Search and order Qiagen kits for sample prep, PCR, and DNA/RNA extraction.
+
+lab-supplies
+Auth
+RBI
+RBI
+https://www.rbi.org.in/
+
+Reserve Bank of India regulatory filings, notifications, and monetary policy.
+
+finance
+RUNT Colombia
+RUNT Colombia
+portalpublico.runt.gov.co
+
+Colombia national vehicle and driver registry portal.
+
+government
+Reddit
+Reddit
+reddit.com
+
+search posts, browse subreddit feeds, fetch posts with comments, get subreddit info, search subreddits, view user profiles.
+
+social-media
+Reliance Digital
+Reliance Digital
+reliancedigital.in
+
+fetch product details with specs and pricing, check bank offers and promotions, verify stock availability by pincode.
+
+ecommerce
+RemoteOK
+RemoteOK
+remoteok.com
+
+remote job listings filtered by skill tag, with salary, company, and application links.
+
+jobs
+Reuters
+Reuters
+reuters.com
+
+browse the full wire feed, filter by section or topic, search articles by keyword, look up stock ticker mentions, track specific journalists, and get article metadata.
+
+news
+Robinhood
+Robinhood
+https://robinhood.com
+
+2,400+ active events covering sports, politics, crypto, climate, and more. Powered by Kalshi infrastructure.
+
+prediction-markets
+SEBI
+SEBI
+sebi.gov.in
+
+Securities and Exchange Board of India regulatory filings and orders.
+
+finance
+SEC EDGAR
+SEC EDGAR
+sec.gov
+
+search public companies, browse filings, extract filing text, get XBRL financials, insider trades, institutional 13F holdings, and beneficial ownership data.
+
+finance
+Semantic Scholar
+Semantic Scholar
+semanticscholar.org
+
+search academic papers, fetch paper metadata with citations and TLDR, search authors, get author profiles with h-index and papers.
+
+research
+Shopify Stores
+Shopify Stores
+shopify.com
+
+scrape product data from any Shopify-powered store. List products, browse collections, get full product details with variants, search products, discover full catalog via sitemap, and verify if a site runs Shopify.
+
+ecommerce
+Skyscanner
+Skyscanner
+skyscanner.co.in
+
+search flights, compare prices, explore destinations, and check fare calendars.
+
+travel
+South China Morning Post
+South China Morning Post
+scmp.com
+
+English-language China, Hong Kong, and Asia news. Get latest articles, browse 12 sections, dedicated China/Hong Kong/Asia/World feeds, read full articles including paywalled content, search by keyword, and follow journalists.
+
+news
+StackOverflow
+StackOverflow
+stackoverflow.com
+
+search questions, get full Q&A with answers, browse hot questions, explore related questions, tag FAQs, top users, and popular tags.
+
+developer-tools
+Steam
+Steam
+steampowered.com
+
+search games, get full details with pricing and reviews, check live player counts, read game news, browse featured and top 100 most-played games.
+
+gaming
+StockTwits
+StockTwits
+stocktwits.com
+
+social sentiment, trending stocks, and message streams from the financial social network with 6M+ investors.
+
+finance
+Substack
+Substack
+substack.com
+
+search posts, get trending content, browse publication archives, fetch full post content, list all categories.
+
+content
+Target
+Target
+target.com
+
+Search products, fetch product details and pricing, browse categories by ID, and locate stores with hours and services.
+
+ecommerce
+Tata 1mg
+Tata 1mg
+https://www.1mg.com
+
+India's leading online pharmacy. Medicines, OTC, wellness products.
+
+pharmacy
+TechCrunch
+TechCrunch
+techcrunch.com
+
+get latest articles, browse by category or company tag, read full articles, track funding rounds, search 259K+ posts, follow journalists, find related articles, and read news snippets.
+
+news
+The Guardian
+The Guardian
+theguardian.com
+
+get latest articles, browse 80 sections, search 2.65M+ articles with date filtering, read full articles with tags and word count, browse by tag or author, and list all sections.
+
+news
+TradingEconomics
+TradingEconomics
+tradingeconomics.com
+
+global economic calendar, live commodity/currency/index/bond prices, earnings calendar, and economic news for 196 countries.
+
+finance
+Truemeds
+Truemeds
+https://www.truemeds.in/
+
+India online pharmacy offering medicines, generics, and health products at discounted prices.
+
+pharmacy
+Trustpilot
+Trustpilot
+trustpilot.com
+
+search companies, get company profiles with ratings, read customer reviews, and browse categories.
+
+reviews
+US Treasury
+US Treasury
+treasury.gov
+
+yield curves, TIPS real yields, bill rates, national debt, auction results, average interest rates, and exchange rates.
+
+finance
+USA Scientific
+USA Scientific
+https://www.usascientific.com/
+
+Search and order USA Scientific lab supplies and equipment for life science research.
+
+lab-supplies
+Auth
+Uber Eats
+Uber Eats
+ubereats.com
+
+search delivery locations, browse nearby restaurants, and get full restaurant menus with prices.
+
+food-delivery
+Auth
+Uline
+Uline
+https://www.uline.com
+
+Browse and order Uline industrial, packaging, and shipping supplies.
+
+lab-supplies
+Auth
+Vijay Sales
+Vijay Sales
+vijaysales.com
+
+search products, get details, check delivery serviceability, manage cart.
+
+ecommerce
+Auth
+WHOIS / Domain Intel
+WHOIS / Domain Intel
+rdap.org
+
+look up domain registration details, DNS records (A, MX, NS, TXT), and IP address ownership.
+
+developer-tools
+Waalaxy
+Waalaxy
+waalaxy.com
+
+all from a session-authenticated workflow.
+
+social-media
+Auth
+Walmart
+Walmart
+walmart.com
+
+America's largest retailer. Product search, categories, deals, reviews, seller profiles, and pricing from walmart.com.
+
+ecommerce
+WazirX
+WazirX
+wazirx.com
+
+Fetch coins and tokens listed on WazirX with market data from exchange and markets APIs.
+
+ecommerce
+We Work Remotely
+We Work Remotely
+weworkremotely.com
+
+remote job listings by category with company and publish date.
+
+jobs
+Wikipedia
+Wikipedia
+en.wikipedia.org
+
+search articles, get page summaries and full content, browse featured articles, on this day events.
+
+reference
+World Bank
+World Bank
+worldbank.org
+
+1,500+ macroeconomic indicators across 200+ countries. GDP, inflation, trade, debt, health, education, climate, poverty, gender, and more.
+
+finance
+Y Combinator
+Y Combinator
+ycombinator.com
+
+startup accelerator and directory of YC-funded companies.
+
+startups
+Yahoo Finance
+Yahoo Finance
+finance.yahoo.com
+
+real-time quotes, historical prices, analyst estimates, options chains, financials, holders, earnings, dividends, splits, trending tickers, and news.
+
+finance
+YouTube
+YouTube
+youtube.com
+
+search videos, get video details with tags and description, view channel info, read top comments, and get search suggestions.
+
+social-media
+Zillow
+Zillow
+zillow.com
+
+search home listings, get property details, check Zestimates, and look up locations.
+
+real-estate
+arXiv
+arXiv
+arxiv.org
+
+search papers by keywords/author/category, fetch full paper metadata, get daily new submissions by category.
+
+research
+eBay
+eBay
+ebay.com
+
+Search and browse eBay listings, fetch listing details, explore category taxonomy, retrieve completed sale prices, and look up seller profiles.
+
+ecommerce
+npm
+npm
+npmjs.com
+
+search JavaScript packages, get package details, check download statistics.
+
+developer-tools
+seats.aero
+seats.aero
+seats.aero
+
+search award flight availability across loyalty programs, browse date-grid calendars, and fetch enriched flight details.
+
+travel

@@ -1,0 +1,61 @@
+# --- Secrets & runtime data --------------------------------------------
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# JSON-as-DB and its lock/bak/tmp peers contain real user emails &
+# watchlists from local testing. Keep the directory but ship empty.
+backend/data/*
+!backend/data/.gitkeep
+
+# Per-user note kept out of the public history at the user's request.
+idea.txt
+
+# --- Python -------------------------------------------------------------
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+
+# --- Node / Next.js -----------------------------------------------------
+node_modules/
+.next/
+out/
+build/
+dist/
+.npm
+*.tsbuildinfo
+next-env.d.ts.lock
+
+# --- Editor / OS --------------------------------------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# --- Logs ---------------------------------------------------------------
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

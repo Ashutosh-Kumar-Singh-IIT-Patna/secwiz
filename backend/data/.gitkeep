@@ -1,0 +1,4 @@
+# Keep backend/data/ in git history.
+# The actual store.json is ignored — it's runtime data containing user
+# emails and watchlists. JsonStore creates a fresh empty store at boot
+# when this directory is empty.
