@@ -10,9 +10,12 @@
 #   secwiz-backend
 #     ANAKIN_API_KEY        — your Anakin Wire / Agentic key (idea.txt §19-20)
 #     GEMINI_API_KEY        — Google AI Studio key
-#     GMAIL_USER            — Gmail account that sends alerts
-#     GMAIL_APP_PASSWORD    — 16-char Gmail App Password (NOT your login pw)
-#     EMAIL_FROM            — usually same as GMAIL_USER
+#     SENDGRID_API_KEY      — SendGrid Web API key with "Mail Send" scope.
+#                             Render free tier blocks outbound SMTP, so this
+#                             is the email transport in production.
+#     EMAIL_FROM            — sender address. Must be verified in SendGrid
+#                             (Single Sender Verification works without a
+#                             domain — verify any Gmail).
 #
 #   secwiz-frontend
 #     NEXT_PUBLIC_API_BASE_URL   — paste the public URL of secwiz-backend,
@@ -68,11 +71,21 @@ services:
         sync: false
       - key: GEMINI_API_KEY
         sync: false
+
+      # SendGrid Web API (HTTPS:443) — primary email transport on Render
+      # free tier, which blocks outbound SMTP. EMAIL_FROM must match a
+      # verified Single Sender / domain identity in your SendGrid account.
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+
+      # Optional fallback: only used if SENDGRID_API_KEY is blank.
+      # Will fail with "Network is unreachable" on Render free tier; keep
+      # blank in production unless you upgrade.
       - key: GMAIL_USER
         sync: false
       - key: GMAIL_APP_PASSWORD
-        sync: false
-      - key: EMAIL_FROM
         sync: false
 
       # --- Demo trigger token ----------------------------------------
