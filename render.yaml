@@ -1,0 +1,154 @@
+# Render Blueprint for Security Alerts Copilot (V1).
+#
+# Deploy with:  render blueprints launch     (or push to GitHub and click
+#                                              "New Blueprint" on the Render
+#                                              dashboard — repo will be
+#                                              detected from .git/config)
+#
+# After first deploy you MUST set these in the dashboard for each service
+# (they're declared `sync: false` below so Render won't try to read them
+# from this file):
+#
+#   secwiz-backend
+#     ANAKIN_API_KEY        — your Anakin Wire / Agentic key (idea.txt §19-20)
+#     GEMINI_API_KEY        — Google AI Studio key
+#     GMAIL_USER            — Gmail account that sends alerts
+#     GMAIL_APP_PASSWORD    — 16-char Gmail App Password (NOT your login pw)
+#     EMAIL_FROM            — usually same as GMAIL_USER
+#
+#   secwiz-frontend
+#     NEXT_PUBLIC_API_BASE_URL   — paste the public URL of secwiz-backend,
+#                                  e.g. https://secwiz-backend.onrender.com
+#     BACKEND_URL                — same URL as above (server-side proxy)
+#
+# DEMO_TRIGGER_TOKEN is auto-generated on the backend and pulled into the
+# frontend automatically via `fromService` — no manual sync needed.
+
+services:
+  # ---------------------------------------------------------------------
+  # Backend — FastAPI + APScheduler + JSON-file store
+  # ---------------------------------------------------------------------
+  - type: web
+    name: secwiz-backend
+    runtime: python
+    plan: starter            # cheapest tier with persistent disks ($7/mo)
+    region: oregon           # change if you want a different region
+    rootDir: backend
+    branch: main
+    autoDeploy: true
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /v1/healthz
+
+    # --- Persistent disk for backend/data/store.json ------------------
+    # JsonStore is the V1 "database". Without a disk, every redeploy or
+    # restart wipes onboardings, runs, alerts, and the wire-catalog cache.
+    # 1 GB is overkill for V1 but it's the smallest billable size.
+    disk:
+      name: secwiz-data
+      mountPath: /var/data
+      sizeGB: 1
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+
+      # The DATA_FILE path lives on the persistent disk so it survives
+      # restarts / redeploys.
+      - key: DATA_FILE
+        value: /var/data/store.json
+
+      # --- Secrets — set in dashboard after first deploy --------------
+      - key: ANAKIN_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_APP_PASSWORD
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+
+      # --- Demo trigger token ----------------------------------------
+      # Render auto-generates a strong random value here. The frontend
+      # service below reads it via `fromService.envVarKey` so the two
+      # stay in sync without a copy-paste.
+      - key: DEMO_TRIGGER_TOKEN
+        generateValue: true
+
+      # --- Tunables (sensible defaults) -------------------------------
+      - key: ANAKIN_BASE_URL
+        value: https://api.anakin.io/v1
+      - key: GEMINI_BASE_URL
+        value: https://generativelanguage.googleapis.com/v1beta
+      - key: GEMINI_MODEL
+        value: gemini-flash-latest
+
+      - key: EMAIL_DRY_RUN
+        value: "false"        # set "true" to silence outbound mail
+
+      - key: HTTP_TIMEOUT_SECONDS
+        value: "30"
+      - key: ANAKIN_POLL_INTERVAL_SECONDS
+        value: "3"
+      - key: ANAKIN_POLL_MAX_SECONDS
+        value: "120"
+
+      - key: RUN_INTERVAL_MINUTES
+        value: "60"           # APScheduler hourly tick
+
+      - key: WIRE_CATALOG_TTL_SECONDS
+        value: "86400"        # 24h cache for GET /v1/wire-catalog
+      - key: INGEST_CONCURRENCY
+        value: "4"
+      - key: MAX_WIRE_CALLS_PER_RUN
+        value: "20"
+      - key: MAX_AGENTIC_CALLS_PER_RUN
+        value: "2"
+      - key: MAX_URL_SCRAPER_BATCHES_PER_RUN
+        value: "3"
+      - key: DEDUP_WINDOW_HOURS
+        value: "24"
+      - key: MAX_GEMINI_CALLS_PER_RUN
+        value: "8"
+      - key: GEMINI_PREFILTER_MIN_SEVERITY
+        value: "35"
+
+      - key: LOG_LEVEL
+        value: INFO
+
+  # ---------------------------------------------------------------------
+  # Frontend — Next.js 14 wizard
+  # ---------------------------------------------------------------------
+  - type: web
+    name: secwiz-frontend
+    runtime: node
+    plan: starter
+    region: oregon
+    rootDir: frontend
+    branch: main
+    autoDeploy: true
+    buildCommand: npm ci && npm run build
+    startCommand: npx next start -p $PORT
+
+    envVars:
+      - key: NODE_VERSION
+        value: "20.10.0"
+
+      # Public URL of the backend, used by the browser. Set this in the
+      # dashboard once the backend has a known onrender.com hostname,
+      # e.g. https://secwiz-backend.onrender.com
+      - key: NEXT_PUBLIC_API_BASE_URL
+        sync: false
+
+      # Same URL, used server-side from the /api/trigger Next.js route.
+      - key: BACKEND_URL
+        sync: false
+
+      # Pulled from the backend so we never copy-paste this token.
+      - key: DEMO_TRIGGER_TOKEN
+        fromService:
+          type: web
+          name: secwiz-backend
+          envVarKey: DEMO_TRIGGER_TOKEN
