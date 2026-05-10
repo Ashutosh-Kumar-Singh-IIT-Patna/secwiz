@@ -14,13 +14,13 @@ Goal: a **clean, minimal** V1 that fulfils the flow in [`PLATFORM_FLOW.md`](./PL
 | “Database” (V1) | **JSON file in repo** (`backend/data/store.json`), accessed via a tiny repo layer with a file lock. | Zero infra. Swap for Postgres later behind the same repo interface. |
 | Job queue | **Celery + Redis** (Celery worker + Celery Beat for scheduling) | Standard Python stack; clean retries/backoff and hourly cron. |
 | Cron / scheduler | **Celery Beat**, single hourly task that fans out one job per user. | No OS cron needed. |
-| Email | **Gmail SMTP** via `smtplib` + a **Gmail App Password** (free) | No paid provider, no domain setup; perfect for demo. |
+| Email | **SendGrid Web API** over HTTPS via `httpx` (free 100/day) | Most cloud free tiers (Render, Heroku, Vercel) block outbound SMTP, so HTTPS-only transport is the safer default. SendGrid's Single Sender Verification works without owning a domain — verify any Gmail. |
 | Anakin | **HTTP client (`httpx`)** wrappers for Wire / Agentic Search / Crawl / URL Scraper / Browser API | Single API key, async-friendly. |
 | Frontend | **Next.js (App Router) + Tailwind**, no auth in V1 | Quick wizard; flow-only. |
 | Hosting (optional) | Backend on **Render / Fly.io / Railway**; frontend on **Vercel**; **Redis** as managed add-on. Locally: `redis-server` + `uvicorn` + `celery` + `next dev`. | Zero-ops for hackathon. |
 | Secrets | Single `.env` per environment | Simplicity. |
 
-> When V1 grows up, the only meaningful migrations are **JSON → Postgres** and **Gmail SMTP → Resend/Postmark**. Everything else stays.
+> When V1 grows up, the only meaningful migration is **JSON → Postgres**. Everything else stays. (Earlier drafts of this plan used Gmail SMTP — we switched to SendGrid before deploy because Render free tier blocks outbound port 465. SendGrid's free tier is 100 emails/day, well past hackathon needs, and the same code path works on any host.)
 
 ---
 
@@ -63,7 +63,7 @@ Goal: a **clean, minimal** V1 that fulfils the flow in [`PLATFORM_FLOW.md`](./PL
                                                  |
                                                  v
                                   +-----------------------------+
-                                  |   Gmail SMTP (smtplib)      |
+                                  |   SendGrid Web API (httpx)  |
                                   +-----------------------------+
 ```
 
@@ -288,25 +288,30 @@ def run_for_user(self, user_id: str) -> dict:
 
 ---
 
-## 7) Backend — email (Gmail SMTP, free)
+## 7) Backend — email (SendGrid Web API, free)
 
-V1 uses a personal/throwaway Gmail with an **App Password** (works with 2FA on, no domain or paid provider needed).
+V1 uses **SendGrid's Web API** over HTTPS:443. Free tier is 100 emails/day, no domain required — **Single Sender Verification** lets you verify a single Gmail and use it as the `From` address for any recipient. Chosen over Gmail SMTP because every cloud free tier we might deploy on (Render, Heroku, Vercel, Fly.io) blocks outbound port 465/587.
 
 ```python
-import smtplib, ssl
-from email.message import EmailMessage
+import httpx
 
-def send_email(to_addr: str, subject: str, body: str) -> None:
-    msg = EmailMessage()
-    msg["From"] = settings.EMAIL_FROM            # e.g. "alerts.demo@gmail.com"
-    msg["To"]   = to_addr
-    msg["Subject"] = subject
-    msg.set_content(body)
-
-    ctx = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ctx) as s:
-        s.login(settings.GMAIL_USER, settings.GMAIL_APP_PASSWORD)
-        s.send_message(msg)
+def send_email(to_addr: str, subject: str, body: str) -> str:
+    payload = {
+        "personalizations": [{
+            "to": [{"email": to_addr}],
+            "subject": subject,
+        }],
+        "from": {"email": settings.EMAIL_FROM},   # verified single sender
+        "content": [{"type": "text/plain", "value": body}],
+    }
+    headers = {"Authorization": f"Bearer {settings.SENDGRID_API_KEY}"}
+    with httpx.Client(timeout=settings.HTTP_TIMEOUT_SECONDS) as client:
+        r = client.post(
+            f"{settings.SENDGRID_API_BASE}/mail/send",
+            json=payload,
+            headers=headers,
+        )
+    return "sent" if 200 <= r.status_code < 300 else "failed"
 ```
 
 - Subject: `[CRITICAL] <package> — <short title>`.
@@ -324,8 +329,8 @@ def send_email(to_addr: str, subject: str, body: str) -> None:
 ```
 ANAKIN_API_KEY=...
 REDIS_URL=redis://localhost:6379/0
-GMAIL_USER=alerts.demo@gmail.com
-GMAIL_APP_PASSWORD=xxxx-xxxx-xxxx-xxxx
+SENDGRID_API_KEY=SG.xxxxxxxxxxxxxxxxxxxxxx
+SENDGRID_API_BASE=https://api.sendgrid.com/v3
 EMAIL_FROM=alerts.demo@gmail.com
 EMAIL_DRY_RUN=false
 DEMO_TRIGGER_TOKEN=changeme
@@ -363,7 +368,7 @@ backend/
         cluster.py
         score.py
         alert.py
-      email_sender.py      # Gmail SMTP wrapper
+      email_sender.py      # SendGrid Web API wrapper
     store/
       json_store.py        # JsonStore class (file-locked I/O)
       models.py            # Pydantic record models
@@ -433,7 +438,7 @@ No login, no dashboard in V1.
 3. Frontend wizard talking to onboard API.
 4. **Anakin client wrappers** (Wire, agentic, crawl, URL scraper) using `httpx`.
 5. **Pipeline** (ingest → match → cluster → score) for **one user, one source family** — start with structured intel (OSV/NVD) + Wire dev-tools (GitHub/PyPI/npm).
-6. Gmail SMTP `send_email` + alert policy.
+6. SendGrid `send_email` + alert policy (HTTPS-only, port-block-proof).
 7. **Celery worker** + `run_for_user` task.
 8. **Celery Beat** hourly schedule.
 9. `GET /v1/wire-catalog` proxy with 24 h cache.
