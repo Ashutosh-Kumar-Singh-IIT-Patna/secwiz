@@ -14,7 +14,9 @@ hackathon-friendly tweaks:
   Anakin's evolving catalog doesn't need a hand-maintained allowlist.
 
 `EMAIL_DRY_RUN=true` is the default, so alerts log instead of send. Flip
-that off plus add Gmail credentials when you want real email.
+that off plus add `SENDGRID_API_KEY` + `EMAIL_FROM` when you want real
+email. SendGrid's Web API is used because most cloud free tiers (Render,
+Heroku, Vercel) block outbound SMTP.
 
 ---
 
@@ -27,7 +29,7 @@ that off plus add Gmail credentials when you want real email.
 | Queue        | Celery 5.6 in `task_always_eager` mode                        |
 | Scheduler    | APScheduler `BackgroundScheduler`, hourly                     |
 | Anakin SDK   | `httpx.AsyncClient` wrappers in `app/services/anakin/`        |
-| Email        | `smtplib` Gmail SMTP (dry-run by default)                     |
+| Email        | SendGrid Web API via `httpx` (dry-run by default)             |
 | Structured   | OSV.dev + NVD direct REST calls (no key required)             |
 
 ---
@@ -143,9 +145,9 @@ Returns the freshly-written `runs[]` record (incl. `stats` and `error`).
 |----------------------------------|-------------------------------|------------------------------------------|
 | `ANAKIN_API_KEY`                 | _empty_                       | Required to hit any Anakin endpoint.     |
 | `ANAKIN_BASE_URL`                | `https://api.anakin.io/v1`    | Override only for staging.               |
-| `EMAIL_DRY_RUN`                  | `true`                        | Log instead of SMTP-send.                |
-| `GMAIL_USER` / `GMAIL_APP_PASSWORD` | _empty_                    | Required if dry-run is off.              |
-| `EMAIL_FROM`                     | _empty_                       | Defaults to `GMAIL_USER`.                |
+| `EMAIL_DRY_RUN`                  | `true`                        | Log alerts instead of sending.           |
+| `SENDGRID_API_KEY`               | _empty_                       | Required if dry-run is off. "Mail Send" scope. |
+| `EMAIL_FROM`                     | _empty_                       | Required if dry-run is off. Verified Single Sender / domain identity in SendGrid. |
 | `DEMO_TRIGGER_TOKEN`             | `changeme`                    | Header on `/v1/runs/trigger`.            |
 | `DATA_FILE`                      | `backend/data/store.json`     | JsonStore path.                          |
 | `RUN_INTERVAL_MINUTES`           | `60`                          | APScheduler interval.                    |

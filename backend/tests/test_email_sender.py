@@ -1,4 +1,4 @@
-"""Email sender — dry-run + SendGrid + Gmail SMTP transports."""
+"""Email sender — dry-run + SendGrid Web API."""
 
 from __future__ import annotations
 
@@ -24,12 +24,7 @@ def _clear_email_env(monkeypatch):
     drops the latter; the .env file values still come through. Setting
     them to empty strings via ``setenv`` overrides the .env entry."""
 
-    for var in (
-        "SENDGRID_API_KEY",
-        "GMAIL_USER",
-        "GMAIL_APP_PASSWORD",
-        "EMAIL_FROM",
-    ):
+    for var in ("SENDGRID_API_KEY", "EMAIL_FROM"):
         monkeypatch.setenv(var, "")
 
 
@@ -43,12 +38,16 @@ def test_dry_run_returns_dry_run_state(caplog):
     assert any("EMAIL DRY-RUN" in rec.getMessage() for rec in caplog.records)
 
 
-def test_no_dry_run_without_credentials_returns_failed(monkeypatch):
+def test_no_dry_run_without_sendgrid_key_returns_failed(monkeypatch, caplog):
     monkeypatch.setenv("EMAIL_DRY_RUN", "false")
     _clear_email_env(monkeypatch)
     _reset_settings_cache()
+    caplog.set_level(logging.ERROR, logger="app.services.email_sender")
     out = send_email(EmailMessage(to="x@y.com", subject="hi", body="body"))
     assert out == "failed"
+    assert any(
+        "SENDGRID_API_KEY is empty" in r.getMessage() for r in caplog.records
+    )
 
 
 # ---------- SendGrid -----------------------------------------------------
@@ -119,26 +118,3 @@ def test_sendgrid_without_from_address_fails_fast(monkeypatch, caplog):
     _reset_settings_cache()
     assert out == "failed"
     assert any("EMAIL_FROM" in r.getMessage() for r in caplog.records)
-
-
-def test_sendgrid_takes_precedence_over_gmail(monkeypatch):
-    """If both SendGrid and Gmail SMTP are configured, SendGrid wins —
-    we never want to attempt SMTP on a host that may block port 465."""
-    monkeypatch.setenv("EMAIL_DRY_RUN", "false")
-    _clear_email_env(monkeypatch)
-    monkeypatch.setenv("SENDGRID_API_KEY", "SG.test-key")
-    monkeypatch.setenv("EMAIL_FROM", "alerts@example.com")
-    monkeypatch.setenv("GMAIL_USER", "fallback@example.com")
-    monkeypatch.setenv("GMAIL_APP_PASSWORD", "wouldnt work")
-    _reset_settings_cache()
-    try:
-        with respx.mock(base_url="https://api.sendgrid.com") as router:
-            router.post("/v3/mail/send").mock(
-                return_value=httpx.Response(202, text="")
-            )
-            out = send_email(
-                EmailMessage(to="x@y.com", subject="x", body="y")
-            )
-            assert out == "sent"
-    finally:
-        _reset_settings_cache()

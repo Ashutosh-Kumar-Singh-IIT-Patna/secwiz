@@ -1,6 +1,6 @@
-"""Send a single hardcoded email to verify the SMTP path end-to-end.
+"""Send a single hardcoded email to verify the SendGrid path end-to-end.
 
-Bypasses the pipeline entirely so we can tell a credentials/network bug
+Bypasses the pipeline entirely so we can tell a credentials / network bug
 apart from a "pipeline produced nothing to alert on" no-op.
 
 Usage:
@@ -20,18 +20,19 @@ from app.services.email_sender import EmailMessage, send_email
 
 def main(recipient: str | None) -> None:
     settings = get_settings()
-    target = recipient or settings.GMAIL_USER
+    target = recipient or settings.EMAIL_FROM
     if not target:
-        raise SystemExit("no recipient (pass arg or set GMAIL_USER in .env)")
+        raise SystemExit("no recipient (pass arg or set EMAIL_FROM in .env)")
 
     message = EmailMessage(
         to=target,
-        subject="[TEST] Security Alerts Copilot — SMTP smoke test",
+        subject="[TEST] Security Alerts Copilot — SendGrid smoke test",
         body=(
-            "This is a one-off SMTP smoke test from scripts/send_test_email.py.\n\n"
-            "If you can read this, the Gmail App Password + EMAIL_DRY_RUN=false "
-            "path is working. The hourly pipeline will use this same channel for "
-            "real CRITICAL/HIGH alerts on your dependency watchlist.\n"
+            "This is a one-off SendGrid smoke test from scripts/send_test_email.py.\n\n"
+            "If you can read this, SENDGRID_API_KEY + EMAIL_FROM + "
+            "EMAIL_DRY_RUN=false are wired correctly. The hourly pipeline will "
+            "use this same channel for real CRITICAL/HIGH alerts on your "
+            "dependency watchlist.\n"
         ),
     )
     print(f"sending dry_run={settings.EMAIL_DRY_RUN} to={target} ...")

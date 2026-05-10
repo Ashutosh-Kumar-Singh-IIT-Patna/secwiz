@@ -48,15 +48,14 @@ class Settings(BaseSettings):
     MAX_GEMINI_CALLS_PER_RUN: int = 8
     GEMINI_PREFILTER_MIN_SEVERITY: int = 35
 
-    GMAIL_USER: str = ""
-    GMAIL_APP_PASSWORD: str = ""
-    EMAIL_FROM: str = ""
-    EMAIL_DRY_RUN: bool = True
-    # SendGrid Web API (HTTPS, port 443). When set, takes precedence over
-    # SMTP — useful on hosts that block outbound SMTP (Render free tier,
-    # Heroku, Vercel, etc). Leave blank to use the Gmail SMTP path above.
+    # Email transport — SendGrid Web API (HTTPS:443).
+    # ``EMAIL_FROM`` must match a verified Single Sender / domain identity
+    # in your SendGrid account. Leave EMAIL_DRY_RUN=true to log alerts
+    # instead of actually sending — useful for local demos.
     SENDGRID_API_KEY: str = ""
     SENDGRID_API_BASE: str = "https://api.sendgrid.com/v3"
+    EMAIL_FROM: str = ""
+    EMAIL_DRY_RUN: bool = True
 
     DEMO_TRIGGER_TOKEN: str = "changeme"
 
